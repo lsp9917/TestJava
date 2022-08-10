@@ -8,6 +8,6 @@ import lombok.Data;
  **/
 @Data
 public class Person {
-    @ChangeValue("小明")
+    @ChangeValue("小明1")
     private String name;
 }
