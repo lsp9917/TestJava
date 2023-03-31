@@ -1,9 +1,6 @@
-import com.sun.org.apache.xerces.internal.xs.ItemPSVI;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -22,14 +19,23 @@ public class JavaTest {
         int a = Integer.parseInt(str[0]);
         int b = Integer.parseInt(str[1]);
         int c = Integer.parseInt(str[2]);
-        int max = a > b ? a : b;
-        max = max > c ? max : c;
+        int max = Math.max(a, b);
+        max = Math.max(max, c);
         System.out.println("最大数" + max);
     }
 
     @Test
     void test1() {
-        System.out.println("练习Java");
+        //'\t'制表符 8
+        //System.out.println("name" + '\t' + "age");
+
+        int number = 0;
+        number = number + 1;
+        number = number + 2 - 1;
+        number = number + 2 - 1;
+        number = number - 1;
+        number = number + 1;
+        System.out.println("number=" + number);
     }
 
     @Test
@@ -146,20 +152,50 @@ public class JavaTest {
     }
 
     @Test
-    void testAnnotation() throws IllegalAccessException {
-        Person person = new Person();
-        Class<? extends Person> personClass = person.getClass();
-        Field[ ] declaredFields = personClass.getDeclaredFields();
-        for (Field f: declaredFields) {
-            if (f.isAnnotationPresent(ChangeValue.class)) {
-                f.setAccessible(true);
-                ChangeValue value = f.getAnnotation(ChangeValue.class);
-                f.set(person,value.value() );
+    void fizzBuzz() {
+        int n = 30;
+        List<String> arr = new ArrayList<String>();
+        for (int i = 1; i <= n; i++) {
+            if (i % 5 != 0 && i % 3 != 0) {
+                arr.add(String.valueOf(i));
+            }
+            if (i % 3 == 0) {
+                arr.add("Fizz");
+            }
+            if (i % 5 == 0) {
+                arr.add("Buzz");
+            }
+            if (i % 5 == 0 && i % 3 == 0) {
+                arr.add("FizzBuzz");
             }
         }
-        System.out.println(person);
+        for (String arr1 : arr) {
+            System.out.print(arr1);
+        }
     }
 
+    @Test
+    void canConstruct() {
+        String ransomNote = "aa";
+        String magazine = "ab";
 
-
+        if(ransomNote.length()>magazine.length()){
+            System.out.println("false");
+        }
+        int count= 0;
+        for(char c : ransomNote.toCharArray()){
+            for(char d : magazine.toCharArray()){
+                if(c==d){
+                    count++;
+                    d = '1';
+                    break;
+                }
+            }
+        }
+        if (count == ransomNote.length()) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+    }
 }
